@@ -405,20 +405,91 @@
 
     </ScrollView>
 
+
+    <View
+        android:id="@+id/overlayView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#805E5C5C"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutPaymentMethod" />
+
     <LinearLayout
         android:id="@+id/linearLayoutPaymentMethod"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/linearlayout_paymentmethod"
+        android:elevation="15dp"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Please choose payment method"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:letterSpacing="0.05"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Wallets"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="COD"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Paypal"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/paymentBtn2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/payment_button"
+            android:gravity="center"
+            android:text="Payment"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-<!--    Bottom Bar-->
+    <!--    Bottom Bar-->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"

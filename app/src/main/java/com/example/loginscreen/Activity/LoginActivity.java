@@ -33,10 +33,6 @@ public class LoginActivity extends AppCompatActivity {
         signUpLayout = (LinearLayout) findViewById(R.id.signUpLayout);
         backHomeBtn = (TextView) findViewById(R.id.backHomeBtn);
 
-
-
-
-
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,10 +74,24 @@ public class LoginActivity extends AppCompatActivity {
                     backHomeBtn.setText("Login");
                     signupBtn.setText("");
 
-                    Animation slideUpAnimation = new TranslateAnimation(0, 0, signUpLayout.getHeight(), 0);
-                    slideUpAnimation.setDuration(300);
-                    signUpLayout.startAnimation(slideUpAnimation);
-                    loginLayout.startAnimation(slideUpAnimation);
+                    signUpLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+                        @Override
+                        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                            Animation slideUpAnimation = new TranslateAnimation(0, 0, signUpLayout.getHeight(), 0);
+                            slideUpAnimation.setDuration(300);
+                            signUpLayout.startAnimation(slideUpAnimation);
+                        }
+                    });
+
+                    loginLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+                        @Override
+                        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                            Animation slideUpAnimation = new TranslateAnimation(0, 0, signUpLayout.getHeight(), 0);
+                            slideUpAnimation.setDuration(300);
+                            loginLayout.startAnimation(slideUpAnimation);
+                        }
+                    });
+
                 } else {
                     backHomeBtn.setText("");
                     signupBtn.setText("Sign Up");

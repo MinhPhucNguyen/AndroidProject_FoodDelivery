@@ -1,12 +1,15 @@
 package com.example.loginscreen.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,15 +28,22 @@ public class CartActivity extends AppCompatActivity {
             textViewItemTotal,
             textViewTotal,
             textViewDeliveryCharge,
-            paymentBtn;
+            paymentBtn,
+            paymentBtn2;
 
     RecyclerView recyclerViewCartList;
 
-    LinearLayout linearLayoutHome;
+    LinearLayout linearLayoutHome, linearLayoutPaymentMethod;
+
+    CoordinatorLayout coordinatorLayout;
+
+    View overlayView;
 
     static double total, totalOfBill;
     static double tax = 10;
     static double delivery = 5.0;
+
+    Boolean paymentMethodVisible = false;
 
     public static final ArrayList<Cart> cartItemList = new ArrayList<>();
 
@@ -83,19 +93,120 @@ public class CartActivity extends AppCompatActivity {
         textViewTotal.setText("$" + totalOfBill);
 
         textViewDeliveryCharge = (TextView) findViewById(R.id.textViewDeliveryCharge);
-        if(cartItemList.size() > 0){
+        if (cartItemList.size() > 0) {
             textViewDeliveryCharge.setText("$" + delivery);
-        }else if(cartItemList.size() == 0){
+        } else if (cartItemList.size() == 0) {
             textViewDeliveryCharge.setText("$0.0");
             textViewTotal.setText("$0.0");
         }
 
-//       Payment BUTTOn
+//      Payment BUTTON
         paymentBtn = (TextView) findViewById(R.id.paymentBtn);
+        paymentBtn2 = (TextView) findViewById(R.id.paymentBtn2);
+        linearLayoutPaymentMethod = (LinearLayout) findViewById(R.id.linearLayoutPaymentMethod);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        overlayView = (View) findViewById(R.id.overlayView);
+
         paymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (linearLayoutPaymentMethod.getVisibility() == View.GONE) {
+                    linearLayoutPaymentMethod.setVisibility(View.VISIBLE);
+                    overlayView.setVisibility(View.VISIBLE);
+                    paymentMethodVisible = true;
+                    coordinatorLayout.setVisibility(View.GONE);
+
+                    linearLayoutPaymentMethod.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+                        @Override
+                        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                            linearLayoutPaymentMethod.removeOnLayoutChangeListener(this);
+                            Animation slideUpAnimation = new TranslateAnimation(0, 0, linearLayoutPaymentMethod.getHeight(), 0);
+                            slideUpAnimation.setDuration(300);
+                            linearLayoutPaymentMethod.startAnimation(slideUpAnimation);
+                        }
+                    });
+
+                } else {
+                    linearLayoutPaymentMethod.setVisibility(View.GONE);
+                    overlayView.setVisibility(View.GONE);
+                    paymentMethodVisible = false;
+                }
+            }
+        });
+
+        overlayView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (paymentMethodVisible) {
+                    linearLayoutPaymentMethod.setVisibility(View.GONE);
+                    overlayView.setVisibility(View.GONE);
+                    paymentMethodVisible = false;
+
+                    Animation slideDownAnimation = new TranslateAnimation(0, 0, 0, linearLayoutPaymentMethod.getHeight());
+                    slideDownAnimation.setDuration(200);
+                    linearLayoutPaymentMethod.startAnimation(slideDownAnimation);
+
+                    slideDownAnimation.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            linearLayoutPaymentMethod.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+        linearLayoutPaymentMethod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (paymentMethodVisible) {
+                    linearLayoutPaymentMethod.setVisibility(View.VISIBLE);
+                    overlayView.setVisibility(View.VISIBLE);
+                    paymentMethodVisible = true;
+                }
+            }
+        });
+
+        paymentBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Toast.makeText(CartActivity.this, "Payment Successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CartActivity.this, MainActivity.class);
+                startActivity(intent);
+                linearLayoutPaymentMethod.setVisibility(View.GONE);
+                overlayView.setVisibility(View.GONE);
+                paymentMethodVisible = false;
+
+                Animation slideDownAnimation = new TranslateAnimation(0, 0, 0, linearLayoutPaymentMethod.getHeight());
+                slideDownAnimation.setDuration(200);
+                linearLayoutPaymentMethod.startAnimation(slideDownAnimation);
+                slideDownAnimation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        linearLayoutPaymentMethod.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
             }
         });
     }
