@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
 
     LinearLayout linearLayoutCart;
-
+    LinearLayout linearLayoutSupport;
     TextView txtAddressUser;
 
     @Override
@@ -72,15 +72,25 @@ public class MainActivity extends AppCompatActivity {
                 openCartAcitity();
             }
         });
-
         txtAddressUser = (TextView) findViewById(R.id.txtAddressUser);
         String address = getIntent().getStringExtra("address");
         txtAddressUser.setText(address);
 
+        linearLayoutSupport = (LinearLayout) findViewById(R.id.linearLayoutSupport);
+        linearLayoutSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMessActivity();
+            }
+        });
     }
 
     public void openCartAcitity() {
         Intent intent = new Intent(this, CartActivity.class);
+        startActivity(intent);
+    }
+    public void openMessActivity() {
+        Intent intent = new Intent(this, MessActivity.class);
         startActivity(intent);
     }
 }
