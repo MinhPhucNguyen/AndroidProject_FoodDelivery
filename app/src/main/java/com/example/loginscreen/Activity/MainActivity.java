@@ -10,9 +10,11 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.loginscreen.Adapter.FoodListAdapter;
 import com.example.loginscreen.Domain.FoodDomain;
+import com.example.loginscreen.Domain.models.User;
 import com.example.loginscreen.R;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
 
     LinearLayout linearLayoutCart;
+
+    TextView txtAddressUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
                 openCartAcitity();
             }
         });
+
+        txtAddressUser = (TextView) findViewById(R.id.txtAddressUser);
+        String address = getIntent().getStringExtra("address");
+        txtAddressUser.setText(address);
+
     }
 
     public void openCartAcitity() {

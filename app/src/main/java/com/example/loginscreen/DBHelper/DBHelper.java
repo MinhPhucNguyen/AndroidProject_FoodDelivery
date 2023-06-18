@@ -8,10 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.loginscreen.Domain.models.User;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "food_app.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String TABLE_NAME = "users";
 
     public static final String COLUMN_ID = "id";
@@ -37,29 +39,52 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertUser(String username, String phone, String address, String password) {
+    public boolean insertUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_USERNAME, username);
-        contentValues.put(COLUMN_PHONE_NUMBER, phone);
-        contentValues.put(COLUMN_ADDRESS, address);
-        contentValues.put(COLUMN_PASSWORD, password);
-        db.insert(TABLE_NAME, null, contentValues);
-        db.close();
-        return true;
+        contentValues.put(COLUMN_USERNAME, user.getUsername());
+        contentValues.put(COLUMN_PHONE_NUMBER, user.getPhone_number());
+        contentValues.put(COLUMN_ADDRESS, user.getAddress());
+        contentValues.put(COLUMN_PASSWORD, user.getPassword());
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
     }
 
-    public boolean checkLogin(String username, String password) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {COLUMN_USERNAME};
-        String selection = COLUMN_USERNAME + " = ? AND " + COLUMN_PASSWORD + " = ?";
-        String[] selectionArgs = {username, password};
-        Cursor cursor = db.query(TABLE_NAME, columns, selection, selectionArgs, null, null, null);
-        boolean hasMatch = (cursor != null && cursor.moveToFirst());
-        if (cursor != null) {
-            cursor.close();
+    public Boolean checkUsername(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE username = ?", new String[]{username});
+        if (cursor.getCount() > 0) {
+            return true;
+        } else {
+            return false;
         }
-        db.close();
-        return hasMatch;
+    }
+
+    public Boolean checkUsernamePassword(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE username = ? AND password = ?", new String[]{username, password});
+        if (cursor.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public User getAuthenticatedUser(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE username = ? AND password = ?", new String[]{username, password});
+        User user = null;
+        if (cursor.moveToFirst()) {
+            String userName = cursor.getString((int) cursor.getColumnIndex(COLUMN_USERNAME));
+            String phoneNumber = cursor.getString((int) cursor.getColumnIndex(COLUMN_PHONE_NUMBER));
+            String address = cursor.getString((int) cursor.getColumnIndex(COLUMN_ADDRESS));
+            String passWord = cursor.getString((int) cursor.getColumnIndex(COLUMN_ADDRESS));
+
+            user = new User(userName, phoneNumber, address, password, 0);
+        }
+        return user;
     }
 }

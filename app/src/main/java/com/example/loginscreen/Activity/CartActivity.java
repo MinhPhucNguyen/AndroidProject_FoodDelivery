@@ -24,12 +24,12 @@ public class CartActivity extends AppCompatActivity {
 
     TextView
             backHomeBtn,
-            txtquantityInCart,
+            txtQuantityInCart,
             textViewItemTotal,
             textViewTotal,
             textViewDeliveryCharge,
             paymentBtn,
-            paymentBtn2;
+            paymentBtn2, cartUsername;
 
     RecyclerView recyclerViewCartList;
 
@@ -57,8 +57,8 @@ public class CartActivity extends AppCompatActivity {
         recyclerViewCartList.setHasFixedSize(true);
 
 //      QUantity In Cart
-        txtquantityInCart = (TextView) findViewById(R.id.txtQuantityInCart);
-        txtquantityInCart.setText(String.valueOf(cartItemList.size()));
+        txtQuantityInCart = (TextView) findViewById(R.id.txtQuantityInCart);
+        txtQuantityInCart.setText(String.valueOf(cartItemList.size()));
 
         if (cartItemList.size() > 0) {
             CartAdapter cartAdapter = new CartAdapter(cartItemList, CartActivity.this);
@@ -209,6 +209,10 @@ public class CartActivity extends AppCompatActivity {
 
             }
         });
+
+        cartUsername = (TextView) findViewById(R.id.cartUsername);
+        String userName = getIntent().getStringExtra("userName");
+        cartUsername.setText(userName);
     }
 
     public static double totalOfBill(double total) {

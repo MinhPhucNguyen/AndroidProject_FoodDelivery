@@ -18,15 +18,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loginscreen.DBHelper.DBHelper;
+import com.example.loginscreen.Domain.models.User;
 import com.example.loginscreen.R;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
     TextView loginBtn, loginNowBtn, signUpNowBtn, signupBtn2, signUpBtn, backHomeBtn;
 
-    LinearLayout signUpLayout, loginLayout;
+    LinearLayout signUpLayout, loginLayout, signupBtn2LinearLayout;
 
     ImageView eye, eye2;
+
+    View signupBtn2Underline;
 
     EditText txtUsername, txtPassword;
 
@@ -39,13 +44,14 @@ public class LoginActivity extends AppCompatActivity {
 
     Boolean isOpenLoginFrom = true;
 
-    DBHelper dbHelper = new DBHelper(LoginActivity.this);
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        dbHelper = new DBHelper(LoginActivity.this);
 
         //LOGIN
         loginNowBtn = (TextView) findViewById(R.id.loginNowBtn);
@@ -87,6 +93,8 @@ public class LoginActivity extends AppCompatActivity {
         signUpNowBtn = (TextView) findViewById(R.id.signUpNowBtn);
         signupBtn2 = (TextView) findViewById(R.id.signupBtn2);
         signUpBtn = (TextView) findViewById(R.id.signUpBtn);
+        signupBtn2LinearLayout = (LinearLayout) findViewById(R.id.signupBtn2LinearLayout);
+        signupBtn2Underline = (View) findViewById(R.id.signupBtn2Underline);
         signUpLayout = (LinearLayout) findViewById(R.id.signUpLayout);
 
         txtUsernameRegister = (EditText) findViewById(R.id.txtUsernameRegister);
@@ -116,38 +124,24 @@ public class LoginActivity extends AppCompatActivity {
         txtAddressRegister.setOnClickListener(editTextClickListener);
         txtPasswordRegister.setOnClickListener(editTextClickListener);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = txtUsername.getText().toString().trim();
-                String password = txtPassword.getText().toString().trim();
-
-                if (isValidLoginForm(username, password)) {
-                    if (dbHelper.checkLogin(username, password)) {
-                        Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Login failed. Please try again", Toast.LENGTH_SHORT).show();
-                    }
-
-                    dbHelper.close();
-                }
-            }
-        });
-
         View.OnClickListener loginClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backHomeBtn.setText("");
-                signupBtn2.setText("Sign Up");
-                signUpLayout.setVisibility(View.GONE);
-                loginLayout.setVisibility(View.VISIBLE);
-                Animation slideUpAnimation = new TranslateAnimation(0, 0, loginLayout.getHeight(), 0);
-                slideUpAnimation.setDuration(300);
-                loginLayout.startAnimation(slideUpAnimation);
-                isOpenLoginFrom = true;
+                if (loginLayout.getVisibility() == View.GONE) {
+                    backHomeBtn.setText("");
+                    signupBtn2.setText("Sign Up");
+                    signupBtn2LinearLayout.addView(signupBtn2);
+                    signupBtn2LinearLayout.addView(signupBtn2Underline);
+                    signUpLayout.setVisibility(View.GONE);
+                    loginLayout.setVisibility(View.VISIBLE);
+                    Animation slideUpAnimation = new TranslateAnimation(0, 0, loginLayout.getHeight(), 0);
+                    slideUpAnimation.setDuration(300);
+                    loginLayout.startAnimation(slideUpAnimation);
+                    isOpenLoginFrom = true;
+                } else {
+                    Intent intent = new Intent(LoginActivity.this, GettingStartedActivity.class);
+                    startActivity(intent);
+                }
             }
         };
         loginNowBtn.setOnClickListener(loginClickListener);
@@ -156,6 +150,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (backHomeBtn.getText() == "Login") {
+                    backHomeBtn.setOnClickListener(loginClickListener);
+                } else {
                     backHomeBtn.setOnClickListener(loginClickListener);
                 }
             }
@@ -169,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginLayout.setVisibility(View.GONE);
                     backHomeBtn.setText("Login");
                     signupBtn2.setText("");
+                    signupBtn2LinearLayout.removeAllViewsInLayout();
                     isOpenLoginFrom = false;
 
                     signUpLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
@@ -191,6 +188,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else {
                     backHomeBtn.setText("");
+                    signupBtn2LinearLayout.addView(signupBtn2);
+                    signupBtn2LinearLayout.addView(signupBtn2Underline);
                     signupBtn2.setText("Sign Up");
                     Animation slideDownAnimation = new TranslateAnimation(0, 0, 0, signUpLayout.getHeight());
                     slideDownAnimation.setDuration(300);
@@ -206,6 +205,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onAnimationEnd(Animation animation) {
                             signUpLayout.setVisibility(View.GONE);
+                            loginLayout.setVisibility(View.VISIBLE);
                         }
 
                         @Override
@@ -239,13 +239,27 @@ public class LoginActivity extends AppCompatActivity {
                 String address = txtAddressRegister.getText().toString().trim();
                 String password = txtPasswordRegister.getText().toString().trim();
 
-                register(username, phone_number, address, password);
+                signup(username, phone_number, address, password);
+            }
+        });
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = txtUsername.getText().toString().trim();
+                String password = txtPassword.getText().toString().trim();
+
+                login(username, password);
             }
         });
 
     }
 
-    private boolean isValidRegister(String username, String phone_number, String address, String password) {
+    private boolean isValidSignUpForm(String username, String phone_number, String address, String password) {
+        if (TextUtils.isEmpty(username) && TextUtils.isEmpty(phone_number) && TextUtils.isEmpty(address) && TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
             return false;
@@ -265,16 +279,41 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    private void register(String username, String phone_number, String address, String password) {
-        if (isValidRegister(username, phone_number, address, password)) {
-            boolean insert = dbHelper.insertUser(username, phone_number, address, password);
-            if (insert) {
-                Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
-                if(loginLayout.getVisibility() == View.GONE){
-                    loginLayout.setVisibility(View.VISIBLE);
+    private void signup(String username, String phone_number, String address, String password) {
+        if (isValidSignUpForm(username, phone_number, address, password)) {
+            Boolean checkUser = dbHelper.checkUsername(username);
+            if (!checkUser) {
+                User user = new User(username, phone_number, address, password, 0);
+
+                Boolean insertNewUser = dbHelper.insertUser(user);
+                if (insertNewUser) {
+                    Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(this, "Sign up failed. Please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "User already exists! Please enter a different username", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void login(String username, String password) {
+        if (isValidLoginForm(username, password)) {
+            Boolean checkUsernamePassword = dbHelper.checkUsernamePassword(username, password);
+            if (checkUsernamePassword) {
+                Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
+
+                User authenticatedUser = dbHelper.getAuthenticatedUser(username, password);
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                startActivity(intent
+                        .putExtra("userName", authenticatedUser.getUsername().toString())
+                        .putExtra("phoneNumber", authenticatedUser.getPhone_number().toString())
+                        .putExtra("address", authenticatedUser.getAddress().toString())
+                );
             }
         }
     }
@@ -286,6 +325,10 @@ public class LoginActivity extends AppCompatActivity {
         }
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(username) && TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
