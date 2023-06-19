@@ -2,7 +2,7 @@ package com.example.loginscreen.Domain.models;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User  {
     private Integer id;
     private String username;
     private String phone_number;

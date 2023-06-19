@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -73,10 +75,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        txtAddressUser = (TextView) findViewById(R.id.txtAddressUser);
-        String address = getIntent().getStringExtra("address");
-        txtAddressUser.setText(address);
 
+//      Pass data to other activity
+        txtAddressUser = (TextView) findViewById(R.id.txtAddressUser);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        String phoneNumber = sharedPreferences.getString("phone_number", "");
+        String address = sharedPreferences.getString("address", "");
+        String password = sharedPreferences.getString("password", "");
+
+        User userData = new User(username, phoneNumber, address, password, 0);
+        txtAddressUser.setText("Welcome: " + userData.getUsername());
     }
 
     public void openCartAcitity() {

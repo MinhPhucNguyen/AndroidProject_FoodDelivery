@@ -26,7 +26,7 @@
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".Activity.Auth.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>

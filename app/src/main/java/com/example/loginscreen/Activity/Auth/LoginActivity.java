@@ -1,27 +1,26 @@
-package com.example.loginscreen.Activity;
+package com.example.loginscreen.Activity.Auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loginscreen.Activity.GettingStartedActivity;
+import com.example.loginscreen.Activity.MainActivity;
 import com.example.loginscreen.DBHelper.DBHelper;
 import com.example.loginscreen.Domain.models.User;
 import com.example.loginscreen.R;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
     Boolean isOpenLoginFrom = true;
 
     DBHelper dbHelper;
+
+    final static  public String USER_DATA = "USER_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -306,14 +307,20 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
 
                 User authenticatedUser = dbHelper.getAuthenticatedUser(username, password);
+                SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE );
+                SharedPreferences.Editor  editor = sharedPreferences.edit();
+
+                editor.putString("username", authenticatedUser.getUsername());
+                editor.putString("phone_number", authenticatedUser.getPhone_number());
+                editor.putString("address", authenticatedUser.getAddress());
+                editor.putString("password", authenticatedUser.getPassword());
+                editor.apply();
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-                startActivity(intent
-                        .putExtra("userName", authenticatedUser.getUsername().toString())
-                        .putExtra("phoneNumber", authenticatedUser.getPhone_number().toString())
-                        .putExtra("address", authenticatedUser.getAddress().toString())
-                );
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
             }
         }
     }
