@@ -2,6 +2,7 @@ package com.example.loginscreen.Activity.Auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loginscreen.Activity.CartActivity;
 import com.example.loginscreen.Activity.GettingStartedActivity;
 import com.example.loginscreen.Activity.MainActivity;
 import com.example.loginscreen.DBHelper.DBHelper;
@@ -45,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     Boolean isOpenLoginFrom = true;
 
     DBHelper dbHelper;
+
+    Context context;
 
     final static public String USER_DATA = "USER_DATA";
 
@@ -236,7 +240,6 @@ public class LoginActivity extends AppCompatActivity {
                 login(username, password);
             }
         });
-
     }
 
     private boolean isValidSignUpForm(String username, String phone_number, String address, String password) {
@@ -272,6 +275,18 @@ public class LoginActivity extends AppCompatActivity {
                 Boolean insertNewUser = dbHelper.insertUser(user);
                 if (insertNewUser) {
                     Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+
+                    User authenticatedUser = dbHelper.getAuthenticatedUser(username, password);
+                    SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putString("fullname", authenticatedUser.getFullname());
+                    editor.putString("username", authenticatedUser.getUsername());
+                    editor.putString("phone_number", authenticatedUser.getPhone_number());
+                    editor.putString("address", authenticatedUser.getAddress());
+                    editor.putString("password", authenticatedUser.getPassword());
+                    editor.apply();
+
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {

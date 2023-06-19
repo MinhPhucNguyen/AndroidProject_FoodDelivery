@@ -32,7 +32,7 @@ public class CartActivity extends AppCompatActivity {
             textViewTotal,
             textViewDeliveryCharge,
             paymentBtn,
-            paymentBtn2, cartUsername;
+            paymentBtn2, cartFullName, cartAddress;
 
     RecyclerView recyclerViewCartList;
 
@@ -213,8 +213,10 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
-        cartUsername = (TextView) findViewById(R.id.cartUsername);
+        cartFullName = (TextView) findViewById(R.id.cartFullName);
+        cartAddress = (TextView) findViewById(R.id.cartAddress);
         SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
+
         String fullName = sharedPreferences.getString("fullname", "");
         String userName = sharedPreferences.getString("username", "");
         String phoneNumber = sharedPreferences.getString("phone_number", "");
@@ -222,7 +224,8 @@ public class CartActivity extends AppCompatActivity {
         String passWord = sharedPreferences.getString("password", "");
 
         User userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
-        cartUsername.setText(userData.getUsername());
+        cartFullName.setText(userData.getFullname());
+        cartAddress.setText(userData.getAddress());
     }
 
     public static double totalOfBill(double total) {

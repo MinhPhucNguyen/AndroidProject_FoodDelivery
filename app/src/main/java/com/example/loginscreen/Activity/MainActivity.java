@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.loginscreen.Activity.Auth.LoginActivity;
 import com.example.loginscreen.Adapter.FoodListAdapter;
 import com.example.loginscreen.Domain.FoodDomain;
 import com.example.loginscreen.Domain.models.User;
@@ -30,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout linearLayoutCart;
 
-    TextView txtAddressUser;
+    TextView txtUsername;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +77,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
 //      Pass data to other activity
-        txtAddressUser = (TextView) findViewById(R.id.txtAddressUser);
+        txtUsername = (TextView) findViewById(R.id.txtUsername);
 
         SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
         String fullName = sharedPreferences.getString("fullname", "");
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         String passWord = sharedPreferences.getString("password", "");
 
         User userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
-        txtAddressUser.setText("Hello: " + userData.getUsername() + ", ");
+        txtUsername.setText("Hello " + userData.getUsername() + ", ");
     }
 
     public void openCartAcitity() {
