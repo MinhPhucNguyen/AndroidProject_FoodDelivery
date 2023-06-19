@@ -34,7 +34,8 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText txtUsername, txtPassword;
 
-    EditText txtUsernameRegister,
+    EditText txtFullNameRegister,
+            txtUsernameRegister,
             txtPhoneNumberRegister,
             txtAddressRegister,
             txtPasswordRegister;
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
     DBHelper dbHelper;
 
-    final static  public String USER_DATA = "USER_DATA";
+    final static public String USER_DATA = "USER_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,32 +99,13 @@ public class LoginActivity extends AppCompatActivity {
         signupBtn2Underline = (View) findViewById(R.id.signupBtn2Underline);
         signUpLayout = (LinearLayout) findViewById(R.id.signUpLayout);
 
+        txtFullNameRegister = (EditText) findViewById(R.id.txtFullNameRegister);
         txtUsernameRegister = (EditText) findViewById(R.id.txtUsernameRegister);
         txtPhoneNumberRegister = (EditText) findViewById(R.id.txtPhoneNumberRegister);
         txtAddressRegister = (EditText) findViewById(R.id.txtAddressRegister);
         txtPasswordRegister = (EditText) findViewById(R.id.txtPasswordRegister);
 
         backHomeBtn = (TextView) findViewById(R.id.backHomeBtn);
-
-        View.OnClickListener editTextClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isOpenLoginFrom) {
-                    isOpenLoginFrom = false;
-                    signUpLayout.setVisibility(View.VISIBLE);
-                    signUpLayout.animate()
-                            .translationY(0)
-                            .alpha(1.0f)
-                            .setDuration(500)
-                            .setListener(null);
-                }
-            }
-        };
-
-        txtUsernameRegister.setOnClickListener(editTextClickListener);
-        txtPhoneNumberRegister.setOnClickListener(editTextClickListener);
-        txtAddressRegister.setOnClickListener(editTextClickListener);
-        txtPasswordRegister.setOnClickListener(editTextClickListener);
 
         View.OnClickListener loginClickListener = new View.OnClickListener() {
             @Override
@@ -235,12 +217,13 @@ public class LoginActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String fullname = txtFullNameRegister.getText().toString().trim();
                 String username = txtUsernameRegister.getText().toString().trim();
                 String phone_number = txtPhoneNumberRegister.getText().toString().trim();
                 String address = txtAddressRegister.getText().toString().trim();
                 String password = txtPasswordRegister.getText().toString().trim();
 
-                signup(username, phone_number, address, password);
+                signup(fullname, username, phone_number, address, password);
             }
         });
 
@@ -280,11 +263,11 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    private void signup(String username, String phone_number, String address, String password) {
+    private void signup(String fullname, String username, String phone_number, String address, String password) {
         if (isValidSignUpForm(username, phone_number, address, password)) {
             Boolean checkUser = dbHelper.checkUsername(username);
             if (!checkUser) {
-                User user = new User(username, phone_number, address, password, 0);
+                User user = new User(fullname, username, phone_number, address, password, 0);
 
                 Boolean insertNewUser = dbHelper.insertUser(user);
                 if (insertNewUser) {
@@ -307,9 +290,10 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
 
                 User authenticatedUser = dbHelper.getAuthenticatedUser(username, password);
-                SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE );
-                SharedPreferences.Editor  editor = sharedPreferences.edit();
+                SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
 
+                editor.putString("fullname", authenticatedUser.getFullname());
                 editor.putString("username", authenticatedUser.getUsername());
                 editor.putString("phone_number", authenticatedUser.getPhone_number());
                 editor.putString("address", authenticatedUser.getAddress());
@@ -318,8 +302,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
-            }
-            else{
+            } else {
                 Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
             }
         }

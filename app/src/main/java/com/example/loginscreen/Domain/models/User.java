@@ -2,15 +2,18 @@ package com.example.loginscreen.Domain.models;
 
 import java.io.Serializable;
 
-public class User  {
+public class User {
     private Integer id;
+
+    private String fullname;
     private String username;
     private String phone_number;
     private String address;
     private String password;
     private Integer role_as;
 
-    public User(String username, String phone_number, String address, String password, Integer role_as) {
+    public User(String fullname, String username, String phone_number, String address, String password, Integer role_as) {
+        this.fullname = fullname;
         this.username = username;
         this.phone_number = phone_number;
         this.address = address;
@@ -24,6 +27,14 @@ public class User  {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUsername() {

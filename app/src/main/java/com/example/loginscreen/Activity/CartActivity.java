@@ -215,12 +215,13 @@ public class CartActivity extends AppCompatActivity {
 
         cartUsername = (TextView) findViewById(R.id.cartUsername);
         SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "");
+        String fullName = sharedPreferences.getString("fullname", "");
+        String userName = sharedPreferences.getString("username", "");
         String phoneNumber = sharedPreferences.getString("phone_number", "");
         String address = sharedPreferences.getString("address", "");
-        String password = sharedPreferences.getString("password", "");
+        String passWord = sharedPreferences.getString("password", "");
 
-        User userData = new User(username, phoneNumber, address, password, 0);
+        User userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
         cartUsername.setText(userData.getUsername());
     }
 
