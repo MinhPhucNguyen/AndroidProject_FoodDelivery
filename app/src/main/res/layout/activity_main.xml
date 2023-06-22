@@ -14,7 +14,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,8 +78,6 @@
 
             </LinearLayout>
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +86,8 @@
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/border_background"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:elevation="10dp">
 
                 <EditText
                     android:id="@+id/editTextText2"
@@ -100,9 +100,9 @@
                     android:drawablePadding="8dp"
                     android:ems="10"
                     android:hint="Search Food, Drink, etc"
+                    android:importantForAutofill="no"
                     android:inputType="textNoSuggestions"
-                    android:padding="8dp"
-                    android:importantForAutofill="no"/>
+                    android:padding="8dp" />
 
                 <View
                     android:id="@+id/view"
@@ -122,44 +122,6 @@
 
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/banner_background">
-
-                <ImageView
-                    android:id="@+id/textView3"
-                    android:layout_width="145dp"
-                    android:layout_height="94dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:src="@drawable/garan"
-                    android:text="You have 2x free \ndelivery Coupon"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@drawable/green_button_background"
-                    android:gravity="center"
-                    android:text="Order now"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -178,7 +140,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
                         android:layout_weight="0.25"
-                        android:background="@drawable/category_background">
+                        android:background="@drawable/border_background2">
 
                         <ImageView
                             android:id="@+id/imageViewPizza"
@@ -207,7 +169,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
                         android:layout_weight="0.25"
-                        android:background="@drawable/category_background">
+                        android:background="@drawable/border_background2">
 
                         <ImageView
                             android:id="@+id/imageViewBurger"
@@ -236,7 +198,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
                         android:layout_weight="0.25"
-                        android:background="@drawable/category_background">
+                        android:background="@drawable/border_background2">
 
                         <ImageView
                             android:id="@+id/imageViewChicken"
@@ -265,7 +227,7 @@
                         android:layout_height="80dp"
                         android:layout_margin="8dp"
                         android:layout_weight="0.25"
-                        android:background="@drawable/category_background">
+                        android:background="@drawable/border_background2">
 
                         <ImageView
                             android:id="@+id/imageViewHotdog"
@@ -300,7 +262,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
                         android:layout_weight="0.25"
-                        android:background="@drawable/category_background">
+                        android:background="@drawable/border_background2">
 
                         <ImageView
                             android:id="@+id/imageViewSushi"
@@ -329,7 +291,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
                         android:layout_weight="0.25"
-                        android:background="@drawable/category_background">
+                        android:background="@drawable/border_background2">
 
                         <ImageView
                             android:id="@+id/imageViewMeat"
@@ -358,7 +320,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
                         android:layout_weight="0.25"
-                        android:background="@drawable/category_background">
+                        android:background="@drawable/border_background2">
 
                         <ImageView
                             android:id="@+id/imageViewDrink"
@@ -387,7 +349,7 @@
                         android:layout_height="80dp"
                         android:layout_margin="8dp"
                         android:layout_weight="0.25"
-                        android:background="@drawable/category_background">
+                        android:background="@drawable/border_background2">
 
                         <ImageView
                             android:id="@+id/imageViewMore"
@@ -453,20 +415,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:paddingBottom="10dp"
-        android:background="@color/light_grey"
+        android:background="#FFFFFF"
         android:elevation="10dp">
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:backgroundTint="@color/light_grey">
+            android:backgroundTint="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:background="@color/light_grey"
+                android:background="#FFFFFF"
                 android:orientation="horizontal">
 
                 <LinearLayout

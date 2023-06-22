@@ -99,7 +99,7 @@ public class DetailActivity extends AppCompatActivity {
                                 DetailActivity.this.startActivity(intent);
                             }
                         });
-                snackbar.setActionTextColor(Color.parseColor("#4CAF50"));
+                snackbar.setActionTextColor(Color.parseColor("#FF9800"));
                 snackbar.show();
             }
         });
