@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loginscreen.Activity.Auth.UserActivity;
 import com.example.loginscreen.Adapter.CartAdapter;
 import com.example.loginscreen.Domain.models.Cart;
 import com.example.loginscreen.Domain.models.User;
@@ -36,7 +37,7 @@ public class CartActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewCartList;
 
-    LinearLayout linearLayoutHome, linearLayoutPaymentMethod;
+    LinearLayout linearLayoutHome, linearLayoutPaymentMethod, UserNavItem;
 
     CoordinatorLayout coordinatorLayout;
 
@@ -226,6 +227,16 @@ public class CartActivity extends AppCompatActivity {
         User userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
         cartFullName.setText(userData.getFullname());
         cartAddress.setText(userData.getAddress());
+
+
+        UserNavItem = (LinearLayout) findViewById(R.id.UserNavItem);
+        UserNavItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CartActivity.this, UserActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public static double totalOfBill(double total) {

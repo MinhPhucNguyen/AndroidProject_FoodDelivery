@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.loginscreen.Activity.Auth.LoginActivity;
+import com.example.loginscreen.Activity.Auth.UserActivity;
 import com.example.loginscreen.Adapter.FoodListAdapter;
 import com.example.loginscreen.Domain.FoodDomain;
 import com.example.loginscreen.Domain.models.User;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText editText;
 
-    LinearLayout linearLayoutCart;
+    LinearLayout linearLayoutCart, UserNavItem;
 
     TextView txtUsername;
 
@@ -89,10 +90,24 @@ public class MainActivity extends AppCompatActivity {
 
         User userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
         txtUsername.setText("Hello " + userData.getUsername() + ", ");
+
+        UserNavItem = (LinearLayout) findViewById(R.id.UserNavItem);
+        UserNavItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void openCartAcitity() {
         Intent intent = new Intent(this, CartActivity.class);
+        startActivity(intent);
+    }
+
+    public void backToHome() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

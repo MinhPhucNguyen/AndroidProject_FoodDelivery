@@ -48,10 +48,6 @@ public class LoginActivity extends AppCompatActivity {
 
     DBHelper dbHelper;
 
-    Context context;
-
-    final static public String USER_DATA = "USER_DATA";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +59,8 @@ public class LoginActivity extends AppCompatActivity {
         loginNowBtn = (TextView) findViewById(R.id.loginNowBtn);
         loginBtn = (TextView) findViewById(R.id.loginBtn);
         loginLayout = (LinearLayout) findViewById(R.id.loginLayout);
-        eye = (ImageView) findViewById(R.id.eye);
-        eye2 = (ImageView) findViewById(R.id.eye2);
+        eye = (ImageView) findViewById(R.id.eye); //Eye in login form
+        eye2 = (ImageView) findViewById(R.id.eye2); //Eye in sign up from
 
         txtUsername = (EditText) findViewById(R.id.txtUsername);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
@@ -74,9 +70,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!passwordVisible) {
                     txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    eye.setImageResource(R.drawable.ic_eye_off);
                     passwordVisible = true;
                 } else {
                     txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    eye.setImageResource(R.drawable.ic_eye);
                     passwordVisible = false;
                 }
             }
@@ -87,9 +85,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!passwordVisible) {
                     txtPasswordRegister.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    eye2.setImageResource(R.drawable.ic_eye_off);
                     passwordVisible = true;
                 } else {
                     txtPasswordRegister.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    eye2.setImageResource(R.drawable.ic_eye);
                     passwordVisible = false;
                 }
             }
@@ -148,32 +148,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (signUpLayout.getVisibility() == View.GONE) {
+                    Animation slideUpAnimation = new TranslateAnimation(0, 0, signUpLayout.getHeight(), 0);
+                    slideUpAnimation.setDuration(300);
                     signUpLayout.setVisibility(View.VISIBLE);
+                    signUpLayout.startAnimation(slideUpAnimation);
                     loginLayout.setVisibility(View.GONE);
                     backHomeBtn.setText("Login");
                     signupBtn2.setText("");
                     signupBtn2LinearLayout.removeAllViewsInLayout();
                     isOpenLoginFrom = false;
 
-                    signUpLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-                        @Override
-                        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                            Animation slideUpAnimation = new TranslateAnimation(0, 0, signUpLayout.getHeight(), 0);
-                            slideUpAnimation.setDuration(300);
-                            signUpLayout.startAnimation(slideUpAnimation);
-                        }
-                    });
-
-                    loginLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-                        @Override
-                        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                            Animation slideUpAnimation = new TranslateAnimation(0, 0, signUpLayout.getHeight(), 0);
-                            slideUpAnimation.setDuration(300);
-                            loginLayout.startAnimation(slideUpAnimation);
-                        }
-                    });
-
-                } else {
+                }
+                else {
                     backHomeBtn.setText("");
                     signupBtn2LinearLayout.addView(signupBtn2);
                     signupBtn2LinearLayout.addView(signupBtn2Underline);
@@ -227,7 +213,7 @@ public class LoginActivity extends AppCompatActivity {
                 String address = txtAddressRegister.getText().toString().trim();
                 String password = txtPasswordRegister.getText().toString().trim();
 
-                signup(fullname, username, phone_number, address, password);
+                    signup(fullname, username, phone_number, address, password);
             }
         });
 
@@ -240,6 +226,13 @@ public class LoginActivity extends AppCompatActivity {
                 login(username, password);
             }
         });
+
+        SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
+        if (sharedPreferences.contains("username") && sharedPreferences.contains("password")) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private boolean isValidSignUpForm(String username, String phone_number, String address, String password) {
@@ -289,6 +282,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
                 }
@@ -317,6 +311,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             } else {
                 Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
             }

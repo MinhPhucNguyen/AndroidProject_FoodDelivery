@@ -503,6 +503,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:backgroundTint="@color/light_grey">
@@ -528,13 +529,12 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="4dp"
                         android:layout_weight="1"
-
                         app:srcCompat="@drawable/bottom_btn1" />
 
                     <TextView
                         android:id="@+id/textViewHome"
                         android:layout_width="match_parent"
-                        android:layout_height="16dp"
+                        android:layout_height="wrap_content"
                         android:text="Home"
                         android:textAlignment="center"
                         android:textColor="@color/green"
@@ -595,6 +595,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/UserNavItem"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -602,19 +603,18 @@
 
                     <ImageView
                         android:id="@+id/imageView4"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="4dp"
                         android:layout_weight="1"
-
-                        app:srcCompat="@drawable/bottom_btn4" />
+                        android:src="@drawable/ic_username" />
 
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Settings"
+                        android:text="User"
                         android:textAlignment="center"
                         android:textColor="#959595"
                         android:textStyle="bold" />

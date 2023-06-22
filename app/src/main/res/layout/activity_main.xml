@@ -432,15 +432,6 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <!--                <TextView-->
-                <!--                    android:id="@+id/textView8"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_weight="1"-->
-                <!--                    android:text="TextView"-->
-                <!--                    android:textAlignment="textEnd"-->
-                <!--                    android:textColor="@color/green" />-->
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -466,6 +457,7 @@
         android:elevation="10dp">
 
         <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:backgroundTint="@color/light_grey">
@@ -473,9 +465,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
                 android:background="@color/light_grey"
-                android:orientation="horizontal"
-                android:layout_marginRight="16dp">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/linearLayoutHome"
@@ -498,9 +490,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Home"
-                        android:textStyle="bold"
                         android:textAlignment="center"
-                        android:textColor="@color/green" />
+                        android:textColor="@color/green"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -525,9 +517,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Order"
-                        android:textStyle="bold"
                         android:textAlignment="center"
-                        android:textColor="#959595" />
+                        android:textColor="#959595"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -551,12 +543,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Support"
-                        android:textStyle="bold"
                         android:textAlignment="center"
-                        android:textColor="#959595" />
+                        android:textColor="#959595"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/UserNavItem"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -564,22 +557,21 @@
 
                     <ImageView
                         android:id="@+id/imageView4"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="4dp"
                         android:layout_weight="1"
-
-                        app:srcCompat="@drawable/bottom_btn4" />
+                        android:src="@drawable/ic_username" />
 
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Setting"
-                        android:textStyle="bold"
+                        android:text="User"
                         android:textAlignment="center"
-                        android:textColor="#959595" />
+                        android:textColor="#959595"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
