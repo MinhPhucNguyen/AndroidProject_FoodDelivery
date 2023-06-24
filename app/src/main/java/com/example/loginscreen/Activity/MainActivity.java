@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText editText;
 
-    LinearLayout linearLayoutCart, UserNavItem;
+    LinearLayout linearLayoutCart,linearLayoutHome, UserNavItem;
 
     TextView txtUsername;
 
@@ -70,7 +71,11 @@ public class MainActivity extends AppCompatActivity {
         adapterFoodList = new FoodListAdapter(items);
         recyclerViewFood.setAdapter(adapterFoodList);
 
+        linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayoutHome);
         linearLayoutCart = (LinearLayout) findViewById(R.id.linearLayoutCart);
+
+
+
         linearLayoutCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

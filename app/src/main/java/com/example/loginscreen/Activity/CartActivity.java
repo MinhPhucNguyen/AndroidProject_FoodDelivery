@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -37,11 +38,13 @@ public class CartActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewCartList;
 
-    LinearLayout linearLayoutHome, linearLayoutPaymentMethod, UserNavItem;
+    LinearLayout linearLayoutHome, linearLayoutCart,linearLayoutPaymentMethod, UserNavItem;
 
     CoordinatorLayout coordinatorLayout;
 
     View overlayView;
+
+    Context context;
 
     static double total, totalOfBill;
     static double tax = 10;
@@ -227,7 +230,6 @@ public class CartActivity extends AppCompatActivity {
         User userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
         cartFullName.setText(userData.getFullname());
         cartAddress.setText(userData.getAddress());
-
 
         UserNavItem = (LinearLayout) findViewById(R.id.UserNavItem);
         UserNavItem.setOnClickListener(new View.OnClickListener() {
