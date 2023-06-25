@@ -71,7 +71,7 @@ public class CartActivity extends AppCompatActivity {
             CartAdapter cartAdapter = new CartAdapter(cartItemList, CartActivity.this);
             recyclerViewCartList.setAdapter(cartAdapter);
         } else {
-            Toast.makeText(this, "No food order", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No food in order", Toast.LENGTH_SHORT).show();
         }
 
         backHomeBtn = (TextView) findViewById(R.id.backHomeBtn);

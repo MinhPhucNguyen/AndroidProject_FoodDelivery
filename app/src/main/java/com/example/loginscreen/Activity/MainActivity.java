@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.loginscreen.Activity.Auth.LoginActivity;
 import com.example.loginscreen.Activity.Auth.UserActivity;
@@ -33,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout linearLayoutCart,linearLayoutHome, UserNavItem;
 
-    TextView txtUsername;
+    TextView txtUsername, textViewCart;
 
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCartAcitity() {
         Intent intent = new Intent(this, CartActivity.class);
+        textViewCart = (TextView) ((CartActivity)context).findViewById(R.id.textViewCart);
+        Toast.makeText(context, "" + textViewCart, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 
