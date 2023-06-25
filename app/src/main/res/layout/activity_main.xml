@@ -14,13 +14,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#1A000000">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1A000000"
             android:orientation="vertical"
             android:paddingBottom="70dp">
 
@@ -78,7 +76,7 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,17 +105,19 @@
             </LinearLayout>
 
             <HorizontalScrollView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                >
+                android:layout_marginBottom="20dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingEnd="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -128,8 +128,9 @@
                             android:layout_width="0dp"
                             android:layout_height="130dp"
                             android:layout_margin="8dp"
-                            android:layout_weight="0.3"
+                            android:layout_weight="0.35"
                             android:background="@drawable/border_background2">
+
                             <LinearLayout
                                 android:id="@+id/linearLayout4"
                                 android:layout_width="wrap_content"
@@ -142,8 +143,7 @@
                                 app:layout_constraintHorizontal_bias="0.482"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.355"
-                             >
+                                app:layout_constraintVertical_bias="0.355">
 
                                 <ImageView
                                     android:id="@+id/imageViewPizza"
@@ -162,8 +162,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="16dp"
                                 android:text="Pizza"
-                                android:textStyle="bold"
                                 android:textColor="@color/white"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
                                 app:layout_constraintStart_toStartOf="@+id/linearLayout4" />
@@ -173,7 +173,7 @@
                             android:layout_width="0dp"
                             android:layout_height="130dp"
                             android:layout_margin="8dp"
-                            android:layout_weight="0.3"
+                            android:layout_weight="0.35"
                             android:background="@drawable/border_background2">
 
                             <LinearLayout
@@ -192,8 +192,8 @@
 
                                 <ImageView
                                     android:id="@+id/imageViewBurger"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
                                     android:layout_margin="10dp"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -208,6 +208,7 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="Burger"
                                 android:textColor="@color/white"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/linearLayout5"
                                 app:layout_constraintStart_toStartOf="@+id/linearLayout5" />
@@ -217,8 +218,9 @@
                             android:layout_width="0dp"
                             android:layout_height="130dp"
                             android:layout_margin="8dp"
-                            android:layout_weight="0.3"
+                            android:layout_weight="0.35"
                             android:background="@drawable/border_background2">
+
                             <LinearLayout
                                 android:id="@+id/linearLayout6"
                                 android:layout_width="wrap_content"
@@ -231,8 +233,7 @@
                                 app:layout_constraintHorizontal_bias="0.482"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.355"
-                               >
+                                app:layout_constraintVertical_bias="0.355">
 
                                 <ImageView
                                     android:id="@+id/imageViewChicken"
@@ -252,6 +253,7 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="Chicken"
                                 android:textColor="@color/white"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
                                 app:layout_constraintStart_toStartOf="@+id/linearLayout6" />
@@ -261,8 +263,9 @@
                             android:layout_width="0dp"
                             android:layout_height="130dp"
                             android:layout_margin="8dp"
-                            android:layout_weight="0.3"
+                            android:layout_weight="0.35"
                             android:background="@drawable/border_background2">
+
                             <LinearLayout
                                 android:id="@+id/linearLayout7"
                                 android:layout_width="wrap_content"
@@ -275,8 +278,7 @@
                                 app:layout_constraintHorizontal_bias="0.482"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.355"
-                               >
+                                app:layout_constraintVertical_bias="0.355">
 
                                 <ImageView
                                     android:id="@+id/imageViewHotdog"
@@ -296,6 +298,7 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="Hotdog"
                                 android:textColor="@color/white"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/linearLayout7"
                                 app:layout_constraintStart_toStartOf="@+id/linearLayout7" />
@@ -312,8 +315,9 @@
                             android:layout_width="0dp"
                             android:layout_height="130dp"
                             android:layout_margin="8dp"
-                            android:layout_weight="0.3"
+                            android:layout_weight="0.35"
                             android:background="@drawable/border_background2">
+
                             <LinearLayout
                                 android:id="@+id/linearLayout8"
                                 android:layout_width="wrap_content"
@@ -326,8 +330,7 @@
                                 app:layout_constraintHorizontal_bias="0.482"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.355"
-                                >
+                                app:layout_constraintVertical_bias="0.355">
 
                                 <ImageView
                                     android:id="@+id/imageViewSushi"
@@ -347,6 +350,7 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="Sushi"
                                 android:textColor="@color/white"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
                                 app:layout_constraintStart_toStartOf="@+id/linearLayout8" />
@@ -356,8 +360,9 @@
                             android:layout_width="0dp"
                             android:layout_height="130dp"
                             android:layout_margin="8dp"
-                            android:layout_weight="0.3"
+                            android:layout_weight="0.35"
                             android:background="@drawable/border_background2">
+
                             <LinearLayout
                                 android:id="@+id/linearLayout9"
                                 android:layout_width="wrap_content"
@@ -370,8 +375,7 @@
                                 app:layout_constraintHorizontal_bias="0.482"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.355"
-                               >
+                                app:layout_constraintVertical_bias="0.355">
 
                                 <ImageView
                                     android:id="@+id/imageViewMeat"
@@ -391,6 +395,7 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="Meat"
                                 android:textColor="@color/white"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/linearLayout9"
                                 app:layout_constraintStart_toStartOf="@+id/linearLayout9" />
@@ -400,8 +405,9 @@
                             android:layout_width="0dp"
                             android:layout_height="130dp"
                             android:layout_margin="8dp"
-                            android:layout_weight="0.3"
+                            android:layout_weight="0.35"
                             android:background="@drawable/border_background2">
+
                             <LinearLayout
                                 android:id="@+id/linearLayout10"
                                 android:layout_width="wrap_content"
@@ -414,8 +420,7 @@
                                 app:layout_constraintHorizontal_bias="0.482"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.355"
-                               >
+                                app:layout_constraintVertical_bias="0.355">
 
                                 <ImageView
                                     android:id="@+id/imageViewDrink"
@@ -435,6 +440,7 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="Drink"
                                 android:textColor="@color/white"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/linearLayout10"
                                 app:layout_constraintStart_toStartOf="@+id/linearLayout10" />
@@ -444,9 +450,9 @@
                             android:layout_width="0dp"
                             android:layout_height="130dp"
                             android:layout_margin="8dp"
-                            android:layout_weight="0.3"
-                            android:background="@drawable/border_background2"
-                           >
+                            android:layout_weight="0.35"
+                            android:background="@drawable/border_background2">
+
                             <LinearLayout
                                 android:id="@+id/linearLayout11"
                                 android:layout_width="wrap_content"
@@ -459,8 +465,7 @@
                                 app:layout_constraintHorizontal_bias="0.482"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.355"
-                               >
+                                app:layout_constraintVertical_bias="0.355">
 
                                 <ImageView
                                     android:id="@+id/imageViewMore"
@@ -480,6 +485,7 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="More"
                                 android:textColor="@color/white"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/linearLayout11"
                                 app:layout_constraintStart_toStartOf="@+id/linearLayout11" />
@@ -487,7 +493,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -503,10 +508,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Popular"
+                    android:text="Popular Dishes"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"/>
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -524,24 +530,24 @@
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:paddingBottom="10dp"
-        android:background="@color/black"
-        android:elevation="10dp">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:backgroundTint="@color/black">
+            android:layout_height="match_parent"
+            android:backgroundTint="#00000000"
+            style="@style/CustomBottomAppBar">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="16dp"
-                android:background="@color/black"
+                android:paddingBottom="10dp"
+                android:background="@drawable/bottom_bar_radius"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -566,7 +572,7 @@
                         android:layout_height="wrap_content"
                         android:text="Home"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/main_color"
                         android:textStyle="bold" />
                 </LinearLayout>
 
