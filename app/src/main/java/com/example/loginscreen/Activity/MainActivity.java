@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutHome = (LinearLayout) findViewById(R.id.linearLayoutHome);
         linearLayoutCart = (LinearLayout) findViewById(R.id.linearLayoutCart);
 
-
-
         linearLayoutCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
