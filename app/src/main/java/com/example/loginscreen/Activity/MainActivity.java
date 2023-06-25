@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout linearLayoutCart,linearLayoutHome, UserNavItem;
 
-    TextView txtUsername, textViewCart;
+    TextView txtUsername;
 
     Context context;
 
@@ -108,8 +108,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCartAcitity() {
         Intent intent = new Intent(this, CartActivity.class);
-        textViewCart = (TextView) ((CartActivity)context).findViewById(R.id.textViewCart);
-        Toast.makeText(context, "" + textViewCart, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 

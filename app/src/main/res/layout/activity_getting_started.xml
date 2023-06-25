@@ -6,27 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".Activity.GettingStartedActivity">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/gettingStartedBackgr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/getting_started2"
+            android:scaleY="2"
+            android:scaleX="2"/>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Getting Started"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="20dp"/>
-
-        <Button
             android:id="@+id/gettingStartedBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Getting Started"/>
-    </LinearLayout>
+            android:text="Getting Started"
+            android:background="@drawable/getting_started_btn"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:elevation="10dp"/>
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

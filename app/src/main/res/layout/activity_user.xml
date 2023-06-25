@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:text="Home"
                         android:textAlignment="center"
-                        android:textColor="@color/main_color"
+                        android:textColor="#CC555555"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -218,7 +218,7 @@
                         android:layout_height="wrap_content"
                         android:text="User"
                         android:textAlignment="center"
-                        android:textColor="#CC555555"
+                        android:textColor="@color/main_color"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>

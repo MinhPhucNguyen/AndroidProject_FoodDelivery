@@ -227,6 +227,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //Nếu đã đăng nhập trước đấy r thì tự đông vào mainActivity
         SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
         if (sharedPreferences.contains("username") && sharedPreferences.contains("password")) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
