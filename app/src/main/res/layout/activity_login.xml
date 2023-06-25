@@ -358,7 +358,7 @@
                         android:src="@drawable/ic_phone" />
 
                     <EditText
-                        android:id="@+id/txtPhoneNumberRegister"
+                        android:id="@+id/txtPhoneNumber"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@android:color/transparent"

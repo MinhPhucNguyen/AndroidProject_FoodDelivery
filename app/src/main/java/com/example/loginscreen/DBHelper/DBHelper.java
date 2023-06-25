@@ -41,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertUser(User user) {
+    public long insertUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_FULLNAME, user.getFullname());
@@ -49,11 +49,9 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_PHONE_NUMBER, user.getPhone_number());
         contentValues.put(COLUMN_ADDRESS, user.getAddress());
         contentValues.put(COLUMN_PASSWORD, user.getPassword());
-        long result = db.insert(TABLE_NAME, null, contentValues);
-        if (result == -1)
-            return false;
-        else
-            return true;
+
+        long insertedId = db.insert("users", null, contentValues);
+        return insertedId;
     }
 
     public Boolean checkUsername(String username) {
@@ -81,6 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE username = ? AND password = ?", new String[]{username, password});
         User user = null;
         if (cursor.moveToFirst()) {
+
             String fullName = cursor.getString((int) cursor.getColumnIndex(COLUMN_FULLNAME));
             String userName = cursor.getString((int) cursor.getColumnIndex(COLUMN_USERNAME));
             String phoneNumber = cursor.getString((int) cursor.getColumnIndex(COLUMN_PHONE_NUMBER));
@@ -91,4 +90,39 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return user;
     }
+
+
+
+
+    public boolean updateUser(int userId,String fullname, String newUsername, String newPhoneNumber, String newAddress, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_USERNAME, newUsername);
+        contentValues.put(COLUMN_PHONE_NUMBER, newPhoneNumber);
+        contentValues.put(COLUMN_ADDRESS, newAddress);
+        contentValues.put(COLUMN_PASSWORD, newPassword);
+
+        String whereClause = COLUMN_ID + " = ?";
+        String[] whereArgs = new String[]{String.valueOf(userId)};
+
+        int numRowsUpdated = db.update(TABLE_NAME, contentValues, whereClause, whereArgs);
+
+        return numRowsUpdated > 0;
+    }
+
+    public int getUserIdByUsername(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int userId = 0;
+
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_ID + " FROM " + TABLE_NAME + " WHERE " + COLUMN_USERNAME + " = ?", new String[]{username});
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt((int)cursor.getColumnIndex(COLUMN_ID));
+        }
+
+        cursor.close();
+        return userId;
+    }
+
+
 }

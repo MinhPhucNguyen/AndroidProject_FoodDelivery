@@ -2,7 +2,6 @@ package com.example.loginscreen.Activity.Auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.loginscreen.Activity.CartActivity;
 import com.example.loginscreen.Activity.GettingStartedActivity;
 import com.example.loginscreen.Activity.MainActivity;
 import com.example.loginscreen.DBHelper.DBHelper;
@@ -105,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
         txtFullNameRegister = (EditText) findViewById(R.id.txtFullNameRegister);
         txtUsernameRegister = (EditText) findViewById(R.id.txtUsernameRegister);
-        txtPhoneNumberRegister = (EditText) findViewById(R.id.txtPhoneNumberRegister);
+        txtPhoneNumberRegister = (EditText) findViewById(R.id.txtPhoneNumber);
         txtAddressRegister = (EditText) findViewById(R.id.txtAddressRegister);
         txtPasswordRegister = (EditText) findViewById(R.id.txtPasswordRegister);
 
@@ -266,8 +264,8 @@ public class LoginActivity extends AppCompatActivity {
             if (!checkUser) {
                 User user = new User(fullname, username, phone_number, address, password, 0);
 
-                Boolean insertNewUser = dbHelper.insertUser(user);
-                if (insertNewUser) {
+                long insertNewUser = dbHelper.insertUser(user);
+                if (insertNewUser != 0) {
                     Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
 
                     User authenticatedUser = dbHelper.getAuthenticatedUser(username, password);
