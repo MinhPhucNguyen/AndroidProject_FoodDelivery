@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText editText;
 
-    LinearLayout linearLayoutCart,linearLayoutHome, UserNavItem;
+    LinearLayout linearLayoutCart,linearLayoutHome, UserNavItem, linearLayoutSupport;
 
     TextView txtUsername;
 
@@ -83,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        linearLayoutSupport = (LinearLayout) findViewById(R.id.linearLayoutSupport);
+        linearLayoutSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMessActivity();
+            }
+        });
 //      Pass data to other activity
         txtUsername = (TextView) findViewById(R.id.txtUsername);
 
@@ -113,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void backToHome() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    public void openMessActivity() {
+        Intent intent = new Intent(MainActivity.this, MessActivity.class);
         startActivity(intent);
     }
 }
