@@ -266,8 +266,8 @@ public class LoginActivity extends AppCompatActivity {
             if (!checkUser) {
                 User user = new User(fullname, username, phone_number, address, password, 0);
 
-                Boolean insertNewUser = dbHelper.insertUser(user);
-                if (insertNewUser) {
+                long insertNewUser = dbHelper.insertUser(user);
+                if (insertNewUser != 0) {
                     Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
 
                     User authenticatedUser = dbHelper.getAuthenticatedUser(username, password);

@@ -2,6 +2,7 @@ package com.example.loginscreen.DBHelper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -41,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertUser(User user) {
+    public long insertUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_FULLNAME, user.getFullname());
@@ -49,11 +50,9 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_PHONE_NUMBER, user.getPhone_number());
         contentValues.put(COLUMN_ADDRESS, user.getAddress());
         contentValues.put(COLUMN_PASSWORD, user.getPassword());
-        long result = db.insert(TABLE_NAME, null, contentValues);
-        if (result == -1)
-            return false;
-        else
-            return true;
+
+        long insertedId = db.insert("users", null, contentValues);
+       return insertedId;
     }
 
     public Boolean checkUsername(String username) {
@@ -81,6 +80,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE username = ? AND password = ?", new String[]{username, password});
         User user = null;
         if (cursor.moveToFirst()) {
+            Integer id = cursor.getInt((int) cursor.getColumnIndex(COLUMN_ID));
             String fullName = cursor.getString((int) cursor.getColumnIndex(COLUMN_FULLNAME));
             String userName = cursor.getString((int) cursor.getColumnIndex(COLUMN_USERNAME));
             String phoneNumber = cursor.getString((int) cursor.getColumnIndex(COLUMN_PHONE_NUMBER));
