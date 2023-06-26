@@ -315,7 +315,7 @@
                             <ImageView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:src="@drawable/ic_username" />
+                                android:src="@drawable/ic_username_black" />
 
                             <EditText
                                 android:id="@+id/txtFullName"
