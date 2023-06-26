@@ -2,10 +2,13 @@ package com.example.loginscreen.Activity;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +38,8 @@ public class MessActivity extends AppCompatActivity {
     private ArrayList<Message> messageModalArrayList;
     private MessAdapter messageRVAdapter;
 
+    TextView   backHomeBtn;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -42,7 +47,7 @@ public class MessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.support);
         RecyclerView chatsRV = findViewById(R.id.idRVChats);
-        ImageButton sendMsgIB = findViewById(R.id.idIBSend);
+        ImageView sendMsgIB = findViewById(R.id.idIBSend);
         userMsgEdt = findViewById(R.id.idEdtMessage);
         messageModalArrayList = new ArrayList<>();
         messageRVAdapter = new MessAdapter(messageModalArrayList, this);
@@ -60,6 +65,21 @@ public class MessActivity extends AppCompatActivity {
                 userMsgEdt.setText("");
             }
         });
+
+
+        backHomeBtn = (TextView) findViewById(R.id.backHomeBtn);
+        backHomeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MessActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void backToHome() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     @SuppressLint("NotifyDataSetChanged")

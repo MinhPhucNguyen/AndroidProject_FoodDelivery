@@ -38,7 +38,7 @@ public class CartActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewCartList;
 
-    LinearLayout linearLayoutHome, linearLayoutCart,linearLayoutPaymentMethod, UserNavItem;
+    LinearLayout linearLayoutHome, linearLayoutSupport,linearLayoutPaymentMethod, UserNavItem;
 
     CoordinatorLayout coordinatorLayout;
 
@@ -239,6 +239,14 @@ public class CartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        linearLayoutSupport = (LinearLayout) findViewById(R.id.linearLayoutSupport);
+        linearLayoutSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMessActivity();
+            }
+        });
     }
 
     public static double totalOfBill(double total) {
@@ -256,6 +264,11 @@ public class CartActivity extends AppCompatActivity {
 
     public void backToHome() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void openMessActivity() {
+        Intent intent = new Intent(CartActivity.this, MessActivity.class);
         startActivity(intent);
     }
 }

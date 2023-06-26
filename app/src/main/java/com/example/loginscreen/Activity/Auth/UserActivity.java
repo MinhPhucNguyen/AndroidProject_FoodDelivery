@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.loginscreen.Activity.CartActivity;
 import com.example.loginscreen.Activity.MainActivity;
+import com.example.loginscreen.Activity.MessActivity;
 import com.example.loginscreen.DBHelper.DBHelper;
 import com.example.loginscreen.Domain.models.User;
 import com.example.loginscreen.R;
@@ -35,7 +36,7 @@ public class UserActivity extends AppCompatActivity {
     DBHelper dbHelper;
 
 
-    LinearLayout linearLayoutCart, linearLayoutHome, linearLayoutChangeInfoMethod;
+    LinearLayout linearLayoutCart, linearLayoutHome, linearLayoutChangeInfoMethod, linearLayoutSupport;
 
     View overlayView;
     Boolean changeMethodVisible = false;
@@ -236,7 +237,13 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
-
+        linearLayoutSupport = (LinearLayout) findViewById(R.id.linearLayoutSupport);
+        linearLayoutSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMessActivity();
+            }
+        });
     }
 
 
@@ -300,5 +307,8 @@ public class UserActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void openMessActivity() {
+        Intent intent = new Intent(UserActivity.this, MessActivity.class);
+        startActivity(intent);
+    }
 }
