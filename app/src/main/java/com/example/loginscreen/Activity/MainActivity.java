@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout linearLayoutCart,linearLayoutHome, UserNavItem, linearLayoutSupport;
 
-    TextView txtUsername;
+    TextView txtUsername,txtFullname;
 
     Context context;
 
@@ -91,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 //      Pass data to other activity
-        txtUsername = (TextView) findViewById(R.id.txtUsername);
+
+        txtFullname = (TextView) findViewById(R.id.txtFullname);
 
         SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
         String fullName = sharedPreferences.getString("fullname", "");
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         String passWord = sharedPreferences.getString("password", "");
 
         User userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
-        txtUsername.setText("Hello " + userData.getUsername() + ", ");
+        txtFullname.setText("Hello " + userData.getFullname() + ", ");
 
         UserNavItem = (LinearLayout) findViewById(R.id.UserNavItem);
         UserNavItem.setOnClickListener(new View.OnClickListener() {
