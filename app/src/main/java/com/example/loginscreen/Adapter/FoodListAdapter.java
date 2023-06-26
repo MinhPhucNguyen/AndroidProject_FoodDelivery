@@ -56,7 +56,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
                 Intent intent=new Intent(holder.itemView.getContext(), DetailActivity.class);
                 intent.putExtra("object",items.get(position));
                 holder.itemView.getContext().startActivity(intent);
-
             }
         });
     }

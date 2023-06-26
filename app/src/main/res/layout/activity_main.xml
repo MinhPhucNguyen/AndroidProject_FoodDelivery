@@ -118,6 +118,7 @@
                     android:layout_height="match_parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/pizzalist"
                         android:layout_width="60dp"
                         android:layout_height="100dp"
                         android:layout_margin="8dp"
@@ -161,6 +162,7 @@
                             app:layout_constraintStart_toStartOf="@+id/linearLayout2" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/hamburgerlist"
                         android:layout_width="60dp"
                         android:layout_height="100dp"
                         android:layout_margin="8dp"
@@ -204,6 +206,7 @@
                             app:layout_constraintStart_toStartOf="@+id/linearLayout3" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/chickenList"
                         android:layout_width="60dp"
                         android:layout_height="100dp"
                         android:layout_margin="8dp"
@@ -247,6 +250,7 @@
                             app:layout_constraintStart_toStartOf="@+id/linearLayout4" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/HotDogList"
                         android:layout_width="60dp"
                         android:layout_height="100dp"
                         android:layout_margin="8dp"
