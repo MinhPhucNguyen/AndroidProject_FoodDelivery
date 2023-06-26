@@ -119,7 +119,9 @@ public class UserActivity extends AppCompatActivity {
                             slideUpAnimation.setDuration(300);
                             linearLayoutChangeInfoMethod.startAnimation(slideUpAnimation);
                         }
+
                     });
+
 
                 } else {
                     linearLayoutChangeInfoMethod.setVisibility(View.GONE);
@@ -128,6 +130,8 @@ public class UserActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
         overlayView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,6 +246,7 @@ public class UserActivity extends AppCompatActivity {
 
                             }
                         });
+                        recreate();
                     }
 
 
