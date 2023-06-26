@@ -169,6 +169,9 @@ public class UserActivity extends AppCompatActivity {
                     linearLayoutChangeInfoMethod.setVisibility(View.VISIBLE);
                     overlayView.setVisibility(View.VISIBLE);
                     changeMethodVisible = true;
+                    coordinatorLayout.setVisibility(View.VISIBLE);
+
+
                 }
             }
         });
@@ -216,6 +219,8 @@ public class UserActivity extends AppCompatActivity {
                         linearLayoutChangeInfoMethod.setVisibility(View.GONE);
                         overlayView.setVisibility(View.GONE);
                         changeMethodVisible = false;
+                        coordinatorLayout.setVisibility(View.VISIBLE);
+
 
                         Animation slideDownAnimation = new TranslateAnimation(0, 0, 0, linearLayoutChangeInfoMethod.getHeight());
                         slideDownAnimation.setDuration(200);
