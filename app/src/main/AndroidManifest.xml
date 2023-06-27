@@ -27,6 +27,11 @@
         <activity
             android:name=".Activity.DetailActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".Activity.FoodListActivity"
+            android:exported="false" />
+
         <activity
             android:name=".Activity.MainActivity"
             android:exported="false"
