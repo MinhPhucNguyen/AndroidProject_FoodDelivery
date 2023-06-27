@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.loginscreen.Domain.FoodDomain;
 import com.example.loginscreen.Domain.models.Cart;
-import com.example.loginscreen.Helper.ManagmentCart;
+
 import com.example.loginscreen.R;
 import com.google.android.material.snackbar.Snackbar;
 
