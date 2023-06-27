@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +43,11 @@ public class UserActivity extends AppCompatActivity {
     View overlayView;
     Boolean changeMethodVisible = false;
 
+    Boolean passwordVisible = false;
+
     CoordinatorLayout coordinatorLayout;
+
+    ImageView eye3;
 
 
     EditText txtFullName, txtPhoneNumber, txtAddress, txtPassword;
@@ -51,6 +57,23 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+
+        eye3 = (ImageView) findViewById(R.id.eye3);
+
+        eye3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!passwordVisible) {
+                    txtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    eye3.setImageResource(R.drawable.ic_eye_off);
+                    passwordVisible = true;
+                } else {
+                    txtPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    eye3.setImageResource(R.drawable.ic_eye);
+                    passwordVisible = false;
+                }
+            }
+        });
 
         logoutBtn = (TextView) findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
