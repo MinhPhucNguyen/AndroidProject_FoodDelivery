@@ -24,9 +24,6 @@ public class FoodListActivity extends AppCompatActivity {
     RecyclerView recyclerviewfoodlist;
     ProductListAdapter productListAdapter;
 
-    ConstraintLayout pizzalist;
-    ArrayList<FoodDomain> PizzaResults, HamburgerResults;
-
     String ButtonName;
     ArrayList<FoodDomain> ProductList;
     DBHelper dbHelper = new DBHelper(this);
@@ -41,9 +38,7 @@ public class FoodListActivity extends AppCompatActivity {
         listProductTitle = (TextView) findViewById(R.id.listProductTitle);
 
         recyclerviewfoodlist = (RecyclerView)findViewById(R.id.recyclerviewfoodlist);
-        recyclerviewfoodlist.setLayoutManager(new LinearLayoutManager(this));
-        recyclerviewfoodlist.setHasFixedSize(true);
-
+        recyclerviewfoodlist.setLayoutManager(new GridLayoutManager(this, 2));
 
         ButtonName = (String) getIntent().getSerializableExtra("ButtonName");
 
@@ -62,7 +57,7 @@ public class FoodListActivity extends AppCompatActivity {
         }
 
 
-        productListAdapter = new ProductListAdapter(ProductList, FoodListActivity.this);
+        productListAdapter = new ProductListAdapter(ProductList, this);
 
         recyclerviewfoodlist.setAdapter(productListAdapter);
 

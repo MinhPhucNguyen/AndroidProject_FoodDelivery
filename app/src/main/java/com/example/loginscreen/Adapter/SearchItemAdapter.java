@@ -17,21 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loginscreen.Activity.DetailActivity;
 import com.example.loginscreen.Activity.FoodListActivity;
+import com.example.loginscreen.Activity.SearchActivity;
 import com.example.loginscreen.Domain.FoodDomain;
 import com.example.loginscreen.R;
 
 import java.util.ArrayList;
 
-public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
+public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
     ArrayList<FoodDomain> productList;
     Context context;
 
     boolean addToCartVisible = false;
     LinearLayout linearLayoutProductItem;
-    CoordinatorLayout coordinatorLayout;
     View overlayView;
 
-    public ProductListAdapter(ArrayList<FoodDomain> productList, Context context) {
+    public SearchItemAdapter(ArrayList<FoodDomain> productList, Context context) {
         this.productList = productList;
         this.context = context;
     }
@@ -39,16 +39,15 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @NonNull
     @Override
-    public ProductListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.viewholder_product_item, parent, false);
+        View view = inflater.inflate(R.layout.viewholder_search_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
-
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchItemAdapter.ViewHolder holder, int position) {
         final FoodDomain foodItem = productList.get(position);
         int imageId = context.getResources().getIdentifier(foodItem.getPicUrl(), "drawable", context.getPackageName());
         holder.pic.setImageResource(imageId);
@@ -56,9 +55,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.ScoreTxt.setText(""+ foodItem.getScore());
         holder.priceTxt.setText("$" + foodItem.getPrice());
 
-        linearLayoutProductItem = ((FoodListActivity)context).findViewById(R.id.linearLayoutProductItem);
-        overlayView = (View) (((FoodListActivity)context).findViewById(R.id.overlayView));
-        coordinatorLayout = (CoordinatorLayout) (((FoodListActivity)context).findViewById(R.id.coordinatorLayout)) ;
+        linearLayoutProductItem = ((SearchActivity)context).findViewById(R.id.linearLayoutProductItem);
+        overlayView = (View) (((SearchActivity)context).findViewById(R.id.overlayView));
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +65,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                     linearLayoutProductItem.setVisibility(View.VISIBLE);
                     overlayView.setVisibility(View.VISIBLE);
                     addToCartVisible = true;
-                    coordinatorLayout.setVisibility(View.GONE);
 
                     linearLayoutProductItem.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                         @Override

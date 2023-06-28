@@ -88,27 +88,69 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editTextText2"
+                    android:id="@+id/editTextSearch"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
                     android:layout_weight="1"
-                    android:background="@drawable/border_background"
-                    android:drawableStart="@drawable/search"
+                    android:background="@drawable/border_background_search"
                     android:drawablePadding="8dp"
                     android:ems="10"
-                    android:hint="Search Food, Drink, etc"
+                    android:hint="Search for...."
                     android:importantForAutofill="no"
-                    android:inputType="textNoSuggestions"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    android:paddingStart="15dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textColorHint="#7C7A7A"
+                    android:textSize="20dp" />
 
+                <ImageButton
+                    android:id="@+id/search_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/search"
+                    android:background="@drawable/custom_search_btn"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp" />
+
+            </LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/more_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="22dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="More"
+                    android:textSize="16dp"
+                    android:textColor="@color/main_color"
+                    android:drawableEnd="@drawable/ic_arrow_right" />
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="1.5dp"
+                    android:layout_gravity="left"
+                    android:background="@color/main_color" />
             </LinearLayout>
 
             <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="20dp"
                 android:paddingEnd="16dp">
@@ -465,9 +507,6 @@
                             app:layout_constraintEnd_toEndOf="@+id/linearLayout9"
                             app:layout_constraintStart_toStartOf="@+id/linearLayout9" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
                 </LinearLayout>
             </HorizontalScrollView>
 

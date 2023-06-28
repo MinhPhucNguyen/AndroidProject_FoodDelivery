@@ -12,8 +12,11 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,28 +37,18 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter adapterFoodList;
     private RecyclerView recyclerViewFood;
-
-    private ProductListAdapter productListAdapter;
-    private  RecyclerView recyclerviewfoodlist;
-
-    private TextView backHomeBtn;
-
     DBHelper dbHelper = new DBHelper(this);
-
     ConstraintLayout pizzalist;
-
     ConstraintLayout hamburgerlist;
-
     ConstraintLayout chickenList;
-
     ConstraintLayout HotDogList;
-    EditText editText;
+    EditText editText, editTextSearch;
+    LinearLayout linearLayoutCart, linearLayoutHome, UserNavItem, linearLayoutSupport, more_btn;
+    TextView txtFullname, textViewPizza, textViewBurger, textViewChicken, textViewHotdog;
+    HorizontalScrollView horizontalScrollView;
+    ImageButton search_btn;
 
-    LinearLayout linearLayoutCart,linearLayoutHome, UserNavItem, linearLayoutSupport;
-
-    TextView txtUsername,txtFullname, textViewCart, textViewPizza, textViewBurger, textViewChicken, textViewHotdog;
-
-    Context context;
+    ArrayList<FoodDomain> searchResults;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -65,16 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
         initRecycleView();
         //
-        textViewPizza = (TextView)findViewById(R.id.textViewPizza);
-        textViewBurger = (TextView)findViewById(R.id.textViewBurger);
-        textViewChicken = (TextView)findViewById(R.id.textViewChicken);
-        textViewHotdog = (TextView)findViewById(R.id.textViewHotdog);
+        textViewPizza = (TextView) findViewById(R.id.textViewPizza);
+        textViewBurger = (TextView) findViewById(R.id.textViewBurger);
+        textViewChicken = (TextView) findViewById(R.id.textViewChicken);
+        textViewHotdog = (TextView) findViewById(R.id.textViewHotdog);
         //
 
-        pizzalist = (ConstraintLayout)findViewById(R.id.pizzalist);
-        hamburgerlist = (ConstraintLayout)findViewById(R.id.hamburgerlist);
-        chickenList = (ConstraintLayout)findViewById(R.id.chickenList) ;
-        HotDogList = (ConstraintLayout)findViewById(R.id.HotDogList) ;
+        pizzalist = (ConstraintLayout) findViewById(R.id.pizzalist);
+        hamburgerlist = (ConstraintLayout) findViewById(R.id.hamburgerlist);
+        chickenList = (ConstraintLayout) findViewById(R.id.chickenList);
+        HotDogList = (ConstraintLayout) findViewById(R.id.HotDogList);
         // pizza
         pizzalist.setOnClickListener(new View.OnClickListener() {
             ArrayList<FoodDomain> PizzaResults = dbHelper.getFoodListByTitle("Pizza");
@@ -216,10 +209,6 @@ public class MainActivity extends AppCompatActivity {
         items.add(new FoodDomain(5, "Vegetable Pizza", "Vegetable pizza can have a variety of ingredients depending on your preference and taste. Some common ingredients are pizza dough, pizza sauce, cheese and assorted vegetables123. You can use fresh or canned vegetables, such as broccoli, tomatoes, bell peppers, cauliflower, carrots, olives, mushrooms, spinach, kale, artichokes and more123. You can also add some herbs and spices, such as oregano, basil, garlic, onion, salt and pepper123. Some recipes also include sliced almonds for some crunch"
                 , "fast_3", 13, 30, 100, 4.5));
 
-        editText = findViewById(R.id.editTextText2);
-        editText.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-
-
         recyclerViewFood = findViewById(R.id.view1);
         recyclerViewFood.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
@@ -232,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCartAcitity();
+                openCartActivity();
             }
         });
 
@@ -259,9 +248,41 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
         String fullName = sharedPreferences.getString("fullname", "");
         txtFullname.setText("Hello " + fullName + ", ");
+
+
+        //More Btn
+        more_btn = (LinearLayout) findViewById(R.id.more_btn);
+        horizontalScrollView = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
+
+        more_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int scrollToRight = 5 * getResources().getDimensionPixelSize(R.dimen.item_width);
+                horizontalScrollView.smoothScrollBy(scrollToRight, 0);
+            }
+        });
+
+        //Search result
+        search_btn = (ImageButton) findViewById(R.id.search_btn);
+        editTextSearch = (EditText) findViewById(R.id.editTextSearch);
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String txtSearch = editTextSearch.getText().toString().trim();
+                if (TextUtils.isEmpty(txtSearch)) {
+                    Toast.makeText(MainActivity.this, "Please enter name of the food", Toast.LENGTH_SHORT).show();
+                } else {
+                    searchResults = dbHelper.getFoodListByTitle(txtSearch);
+                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                    intent.putExtra("searchResults", searchResults);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
-    public void openCartAcitity() {
+    public void openCartActivity() {
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
     }
