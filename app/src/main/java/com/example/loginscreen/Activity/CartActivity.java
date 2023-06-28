@@ -34,11 +34,11 @@ public class CartActivity extends AppCompatActivity {
             textViewTotal,
             textViewDeliveryCharge,
             paymentBtn,
-            paymentBtn2, cartFullName, cartAddress;
+            paymentBtn2, cartFullName, cartAddress, cartPhoneNumber;
 
     RecyclerView recyclerViewCartList;
 
-    LinearLayout linearLayoutHome, linearLayoutSupport,linearLayoutPaymentMethod, UserNavItem;
+    LinearLayout linearLayoutHome, linearLayoutSupport, linearLayoutPaymentMethod, UserNavItem;
 
     CoordinatorLayout coordinatorLayout;
 
@@ -219,17 +219,16 @@ public class CartActivity extends AppCompatActivity {
 
         cartFullName = (TextView) findViewById(R.id.cartFullName);
         cartAddress = (TextView) findViewById(R.id.cartAddress);
+        cartPhoneNumber = (TextView) findViewById(R.id.cartPhoneNumber);
+
         SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
-
         String fullName = sharedPreferences.getString("fullname", "");
-        String userName = sharedPreferences.getString("username", "");
-        String phoneNumber = sharedPreferences.getString("phone_number", "");
         String address = sharedPreferences.getString("address", "");
-        String passWord = sharedPreferences.getString("password", "");
+        String phoneNumber = sharedPreferences.getString("phone_number", "");
 
-        User userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
-        cartFullName.setText(userData.getFullname());
-        cartAddress.setText(userData.getAddress());
+        cartFullName.setText(fullName);
+        cartAddress.setText(address);
+        cartPhoneNumber.setText(phoneNumber);
 
         UserNavItem = (LinearLayout) findViewById(R.id.UserNavItem);
         UserNavItem.setOnClickListener(new View.OnClickListener() {

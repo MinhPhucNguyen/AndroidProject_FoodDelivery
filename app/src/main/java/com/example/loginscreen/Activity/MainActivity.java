@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         textViewBurger = (TextView)findViewById(R.id.textViewBurger);
         textViewChicken = (TextView)findViewById(R.id.textViewChicken);
         textViewHotdog = (TextView)findViewById(R.id.textViewHotdog);
-
         //
 
         pizzalist = (ConstraintLayout)findViewById(R.id.pizzalist);
@@ -244,19 +243,6 @@ public class MainActivity extends AppCompatActivity {
                 openMessActivity();
             }
         });
-//      Pass data to other activity
-
-        txtFullname = (TextView) findViewById(R.id.txtFullname);
-
-        SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
-        String fullName = sharedPreferences.getString("fullname", "");
-        String userName = sharedPreferences.getString("username", "");
-        String phoneNumber = sharedPreferences.getString("phone_number", "");
-        String address = sharedPreferences.getString("address", "");
-        String passWord = sharedPreferences.getString("password", "");
-
-        User userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
-        txtFullname.setText("Hello " + userData.getFullname() + ", ");
 
         UserNavItem = (LinearLayout) findViewById(R.id.UserNavItem);
         UserNavItem.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +252,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+//      Pass data to other activity
+        txtFullname = (TextView) findViewById(R.id.txtFullname);
+        SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
+        String fullName = sharedPreferences.getString("fullname", "");
+        txtFullname.setText("Hello " + fullName + ", ");
     }
 
     public void openCartAcitity() {
@@ -273,10 +266,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void backToHome() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
     public void openMessActivity() {
         Intent intent = new Intent(MainActivity.this, MessActivity.class);
         startActivity(intent);

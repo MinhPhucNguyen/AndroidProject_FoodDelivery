@@ -107,11 +107,23 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:src="@drawable/ic_home" />
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_home" />'
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_phone_2"
+                                android:layout_marginTop="24dp"/>
+                        </LinearLayout>
 
 
                         <LinearLayout
@@ -137,6 +149,16 @@
                                 android:textSize="13sp"
                                 android:textStyle="bold"
                                 android:layout_marginTop="5dp"/>
+
+                            <TextView
+                                android:id="@+id/cartPhoneNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0000000000"
+                                android:textColor="@color/white"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="15dp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -147,7 +169,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
 
                     <ImageView
                         android:layout_width="wrap_content"

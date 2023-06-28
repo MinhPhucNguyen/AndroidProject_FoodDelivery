@@ -24,26 +24,27 @@ import com.example.loginscreen.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView loginBtn, loginNowBtn, signUpNowBtn, signupBtn2, signUpBtn, backHomeBtn;
-
-    LinearLayout signUpLayout, loginLayout, signupBtn2LinearLayout;
-
-    ImageView eye, eye2;
-
+    TextView loginBtn,
+            loginNowBtn,
+            signUpNowBtn,
+            signupBtn2,
+            signUpBtn,
+            backHomeBtn;
+    LinearLayout signUpLayout,
+            loginLayout,
+            signupBtn2LinearLayout;
+    ImageView eye,
+            eye2;
     View signupBtn2Underline;
-
-    EditText txtUsername, txtPassword;
-
+    EditText txtUsername,
+            txtPassword;
     EditText txtFullNameRegister,
             txtUsernameRegister,
             txtPhoneNumberRegister,
             txtAddressRegister,
             txtPasswordRegister;
-
     Boolean passwordVisible = false;
-
     Boolean isOpenLoginFrom = true;
-
     DBHelper dbHelper;
 
     @Override
@@ -54,14 +55,13 @@ public class LoginActivity extends AppCompatActivity {
         dbHelper = new DBHelper(LoginActivity.this);
 
         //LOGIN
+        txtUsername = (EditText) findViewById(R.id.txtUsername);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        eye = (ImageView) findViewById(R.id.eye); //Eye in login form
+
         loginNowBtn = (TextView) findViewById(R.id.loginNowBtn);
         loginBtn = (TextView) findViewById(R.id.loginBtn);
         loginLayout = (LinearLayout) findViewById(R.id.loginLayout);
-        eye = (ImageView) findViewById(R.id.eye); //Eye in login form
-        eye2 = (ImageView) findViewById(R.id.eye2); //Eye in sign up from
-
-        txtUsername = (EditText) findViewById(R.id.txtUsername);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
 
         eye.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,37 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-        eye2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!passwordVisible) {
-                    txtPasswordRegister.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    eye2.setImageResource(R.drawable.ic_eye_off);
-                    passwordVisible = true;
-                } else {
-                    txtPasswordRegister.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    eye2.setImageResource(R.drawable.ic_eye);
-                    passwordVisible = false;
-                }
-            }
-        });
-
-        //SIGN UP
-        signUpNowBtn = (TextView) findViewById(R.id.signUpNowBtn);
-        signupBtn2 = (TextView) findViewById(R.id.signupBtn2);
-        signUpBtn = (TextView) findViewById(R.id.signUpBtn);
-        signupBtn2LinearLayout = (LinearLayout) findViewById(R.id.signupBtn2LinearLayout);
-        signupBtn2Underline = (View) findViewById(R.id.signupBtn2Underline);
-        signUpLayout = (LinearLayout) findViewById(R.id.signUpLayout);
-
-        txtFullNameRegister = (EditText) findViewById(R.id.txtFullNameRegister);
-        txtUsernameRegister = (EditText) findViewById(R.id.txtUsernameRegister);
-        txtPhoneNumberRegister = (EditText) findViewById(R.id.txtPhoneNumber);
-        txtAddressRegister = (EditText) findViewById(R.id.txtAddressRegister);
-        txtPasswordRegister = (EditText) findViewById(R.id.txtPasswordRegister);
-
-        backHomeBtn = (TextView) findViewById(R.id.backHomeBtn);
 
         View.OnClickListener loginClickListener = new View.OnClickListener() {
             @Override
@@ -130,6 +99,45 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
         loginNowBtn.setOnClickListener(loginClickListener);
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = txtUsername.getText().toString().trim();
+                String password = txtPassword.getText().toString().trim();
+                login(username, password);
+            }
+        });
+
+        //SIGN UP
+        signUpNowBtn = (TextView) findViewById(R.id.signUpNowBtn);
+        signupBtn2 = (TextView) findViewById(R.id.signupBtn2);
+        signUpBtn = (TextView) findViewById(R.id.signUpBtn);
+        signupBtn2LinearLayout = (LinearLayout) findViewById(R.id.signupBtn2LinearLayout);
+        signupBtn2Underline = (View) findViewById(R.id.signupBtn2Underline);
+        signUpLayout = (LinearLayout) findViewById(R.id.signUpLayout);
+        txtFullNameRegister = (EditText) findViewById(R.id.txtFullNameRegister);
+        txtUsernameRegister = (EditText) findViewById(R.id.txtUsernameRegister);
+        txtPhoneNumberRegister = (EditText) findViewById(R.id.txtPhoneNumber);
+        txtAddressRegister = (EditText) findViewById(R.id.txtAddressRegister);
+        txtPasswordRegister = (EditText) findViewById(R.id.txtPasswordRegister);
+        backHomeBtn = (TextView) findViewById(R.id.backHomeBtn);
+        eye2 = (ImageView) findViewById(R.id.eye2); //Eye in sign up from
+
+        eye2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!passwordVisible) {
+                    txtPasswordRegister.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    eye2.setImageResource(R.drawable.ic_eye_off);
+                    passwordVisible = true;
+                } else {
+                    txtPasswordRegister.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    eye2.setImageResource(R.drawable.ic_eye);
+                    passwordVisible = false;
+                }
+            }
+        });
 
         backHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,10 +195,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
-
         signUpNowBtn.setOnClickListener(signUpClickListener);
         signupBtn2.setOnClickListener(signUpClickListener);
-
 
         signUpLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,22 +216,12 @@ public class LoginActivity extends AppCompatActivity {
                 String phone_number = txtPhoneNumberRegister.getText().toString().trim();
                 String address = txtAddressRegister.getText().toString().trim();
                 String password = txtPasswordRegister.getText().toString().trim();
-
-                    signup(fullname, username, phone_number, address, password);
+                signup(fullname, username, phone_number, address, password);
             }
         });
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = txtUsername.getText().toString().trim();
-                String password = txtPassword.getText().toString().trim();
-
-                login(username, password);
-            }
-        });
-
-        //Nếu đã đăng nhập trước đấy r thì tự đông vào mainActivity
+        //Lưu trang thái đăng nhập trước đấy
+        //SharePreferneces lưu trữ cặp khóa giá trị
         SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
         if (sharedPreferences.contains("username") && sharedPreferences.contains("password")) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -268,6 +264,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (insertNewUser != 0) {
                     Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
 
+                    //Truyền thông tin đăng nhập tới MainActivity
                     User authenticatedUser = dbHelper.getAuthenticatedUser(username, password);
                     SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
