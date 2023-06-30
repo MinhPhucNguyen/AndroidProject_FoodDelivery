@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +33,10 @@ public class SearchActivity extends AppCompatActivity {
     TextView backHomeBtn, textViewNoResult, countResult, searchfortxt,plusBtn, minusBtn, numberOrderTxt ;
     RecyclerView recyclerviewSearchResult;
 
+    LinearLayout linearLayoutProductItem;
     ArrayList<FoodDomain> searchResults;
+
+    View overlayView;
 
     private FoodDomain food;
 
@@ -77,6 +83,9 @@ public class SearchActivity extends AppCompatActivity {
         ImageView foodPic = (ImageView) findViewById(R.id.foodPic);
         TextView foodName = (TextView) findViewById(R.id.foodName);
         TextView foodPrice = (TextView) findViewById(R.id.foodPrice);
+        linearLayoutProductItem = (LinearLayout) findViewById(R.id.linearLayoutProductItem);
+        overlayView = (View) findViewById(R.id.overlayView);
+
 
         foodPic.setImageResource(imageResId);
         foodName.setText(foodItem.getTitle());
@@ -93,7 +102,6 @@ public class SearchActivity extends AppCompatActivity {
             numberOrder = numberOrder + 1;
             numberOrderTxt.setText("" + numberOrder);
             addToCartBtn.setText("Add to Cart - $" + Math.round(numberOrder * foodItem.getPrice()));
-
         });
 
         minusBtn.setOnClickListener(v -> {
@@ -107,9 +115,16 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         addToCartBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 addToCart(foodItem);
+                linearLayoutProductItem.setVisibility(View.GONE);
+                overlayView.setVisibility(View.GONE);
+
+                Animation slideDownAnimation = new TranslateAnimation(0, 0, 0, linearLayoutProductItem.getHeight());
+                slideDownAnimation.setDuration(200);
+                linearLayoutProductItem.startAnimation(slideDownAnimation);
 
                 Snackbar snackbar = Snackbar
                         .make(SearchActivity.this, v ,"Add Successfully", Snackbar.LENGTH_LONG )

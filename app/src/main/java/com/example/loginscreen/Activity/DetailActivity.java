@@ -24,14 +24,11 @@ public class DetailActivity extends AppCompatActivity {
     private FoodDomain food;
     private int numberOrder = 1;
 
-//    private ManagmentCart managmentCart;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-//        managmentCart=new ManagmentCart(DetailActivity.this);
         initView();
         getBundle();
     }
@@ -69,11 +66,6 @@ public class DetailActivity extends AppCompatActivity {
             numberOrderTxt.setText("" + numberOrder);
             addToCartBtn.setText("Add to Cart - $" + Math.round(numberOrder * food.getPrice()));
         });
-
-//        addToCartBtn.setOnClickListener(v->{
-//            object.setNumberinCart(numberOrder);
-//            managmentCart.insertFood(object);
-//        });
 
         imageViewBackHome = (ImageView) findViewById(R.id.imageViewBackHome);
         imageViewBackHome.setOnClickListener(new View.OnClickListener() {

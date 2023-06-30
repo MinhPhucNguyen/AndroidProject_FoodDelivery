@@ -67,6 +67,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                     overlayView.setVisibility(View.VISIBLE);
                     addToCartVisible = true;
 
+                    //tranfer data to modal when click on cart icon in item search result
                     ((SearchActivity) context).openModalWithData(foodItem, imageId);
 
                     linearLayoutProductItem.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
