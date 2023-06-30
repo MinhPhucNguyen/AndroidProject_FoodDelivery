@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,10 +27,10 @@ import java.util.ArrayList;
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.ViewHolder> {
     ArrayList<FoodDomain> productList;
     Context context;
-
     boolean addToCartVisible = false;
     LinearLayout linearLayoutProductItem;
     View overlayView;
+
 
     public SearchItemAdapter(ArrayList<FoodDomain> productList, Context context) {
         this.productList = productList;
@@ -52,11 +53,11 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         int imageId = context.getResources().getIdentifier(foodItem.getPicUrl(), "drawable", context.getPackageName());
         holder.pic.setImageResource(imageId);
         holder.titleTxt.setText(foodItem.getTitle());
-        holder.ScoreTxt.setText(""+ foodItem.getScore());
+        holder.ScoreTxt.setText("" + foodItem.getScore());
         holder.priceTxt.setText("$" + foodItem.getPrice());
 
-        linearLayoutProductItem = ((SearchActivity)context).findViewById(R.id.linearLayoutProductItem);
-        overlayView = (View) (((SearchActivity)context).findViewById(R.id.overlayView));
+        linearLayoutProductItem = ((SearchActivity) context).findViewById(R.id.linearLayoutProductItem);
+        overlayView = (View) (((SearchActivity) context).findViewById(R.id.overlayView));
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +66,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                     linearLayoutProductItem.setVisibility(View.VISIBLE);
                     overlayView.setVisibility(View.VISIBLE);
                     addToCartVisible = true;
+
+                    ((SearchActivity) context).openModalWithData(foodItem, imageId);
 
                     linearLayoutProductItem.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                         @Override
