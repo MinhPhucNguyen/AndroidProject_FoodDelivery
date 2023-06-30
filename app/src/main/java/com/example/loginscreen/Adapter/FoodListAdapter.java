@@ -38,7 +38,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
         context= parent.getContext();
         return new ViewHolder(inflate);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.titleTxt.setText(items.get(position).getTitle());
@@ -50,17 +49,16 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
                 .load(drawableResourceId)
                 .transform(new GranularRoundedCorners(30,30,0,0))
                 .into(holder.pic);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(holder.itemView.getContext(), DetailActivity.class);
                 intent.putExtra("object",items.get(position));
                 holder.itemView.getContext().startActivity(intent);
-
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return items.size();

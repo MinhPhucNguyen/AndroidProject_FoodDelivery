@@ -56,8 +56,13 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //-------------------------------------------------sets the layout for the activity------------------------------------------
         setContentView(R.layout.activity_user);
 
+        //-----
+
+        //-------------------------------------------------the visibility of a password field----------------------------------------
         eye3 = (ImageView) findViewById(R.id.eye3);
 
         eye3.setOnClickListener(new View.OnClickListener() {
@@ -75,10 +80,15 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
+        //-----
+
+        //-------------------------------------------------logoutBtn--------------------------------------------------------------------
+
         logoutBtn = (TextView) findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Code for logout functionality
 
                 SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -91,12 +101,17 @@ public class UserActivity extends AppCompatActivity {
                 finish();
             }
         });
+        //-----
 
+
+
+        //-------------------------------------------------Set OnClickListener for  LinearLayout---------------------------------------------
         linearLayoutCart = (LinearLayout) findViewById(R.id.linearLayoutCart);
         linearLayoutCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCartAcitity();
+                Intent intent = new Intent(UserActivity.this, CartActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -104,7 +119,8 @@ public class UserActivity extends AppCompatActivity {
         linearLayoutHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backToHome();
+                Intent intent = new Intent(UserActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -112,19 +128,21 @@ public class UserActivity extends AppCompatActivity {
         linearLayoutSupport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMessActivity();
+                Intent intent = new Intent(UserActivity.this, MessActivity.class);
+                startActivity(intent);
             }
         });
+        //-------
 
 
         //USER BTN
+
+        //--------------------------------------------------changBtn------------------------------------------------------------------------
 
         changeBtn = (TextView) findViewById(R.id.changeBtn);
         linearLayoutChangeInfoMethod = (LinearLayout) findViewById(R.id.linearLayoutChangeInfoMethod);
         overlayView = (View) findViewById(R.id.overlayView);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-
-
         changeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,6 +221,8 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
+        //--------------------
+
 
         FullName = (TextView) findViewById(R.id.FullName);
         SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
@@ -214,13 +234,14 @@ public class UserActivity extends AppCompatActivity {
         String passWord = sharedPreferences.getString("password", "");
 
         userData = new User(fullName, userName, phoneNumber, address, passWord, 0);
-        FullName.setText(userData.getFullname());
+
 
         txtFullName = (EditText) findViewById(R.id.txtFullName);
         txtPhoneNumber = (EditText) findViewById(R.id.txtPhoneNumber);
         txtAddress = (EditText) findViewById(R.id.txtAddress);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
 
+        FullName.setText(userData.getFullname());
         txtFullName.setText(userData.getFullname());
         txtPhoneNumber.setText(userData.getPhone_number());
         txtAddress.setText(userData.getAddress());
@@ -332,20 +353,6 @@ public class UserActivity extends AppCompatActivity {
         return false;
     }
 
-    public void openCartAcitity() {
-        Intent intent = new Intent(this, CartActivity.class);
-        startActivity(intent);
-    }
-
-    public void backToHome() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void openMessActivity() {
-        Intent intent = new Intent(this, MessActivity.class);
-        startActivity(intent);
-    }
 
 
 }
