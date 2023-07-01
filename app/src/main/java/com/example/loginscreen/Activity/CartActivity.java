@@ -193,7 +193,7 @@ public class CartActivity extends AppCompatActivity {
                 linearLayoutPaymentMethod.setVisibility(View.GONE);
                 overlayView.setVisibility(View.GONE);
                 paymentMethodVisible = false;
-
+                cartItemList.clear();
                 Animation slideDownAnimation = new TranslateAnimation(0, 0, 0, linearLayoutPaymentMethod.getHeight());
                 slideDownAnimation.setDuration(200);
                 linearLayoutPaymentMethod.startAnimation(slideDownAnimation);

@@ -231,10 +231,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isValidSignUpForm(String username, String phone_number, String address, String password) {
-        if (TextUtils.isEmpty(username) && TextUtils.isEmpty(phone_number) && TextUtils.isEmpty(address) && TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-            return false;
-        }
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(this, "Please enter a username", Toast.LENGTH_SHORT).show();
             return false;
@@ -256,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void signup(String fullname, String username, String phone_number, String address, String password) {
         if (isValidSignUpForm(username, phone_number, address, password)) {
-            Boolean checkUser = dbHelper.checkUsername(username);
+            Boolean checkUser = dbHelper.checkUsername(username, password);
             if (!checkUser) {
                 User user = new User(fullname, username, phone_number, address, password, 0);
 
@@ -283,7 +279,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(this, "User already exists! Please enter a different username", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "User already exists! Please enter a different username and password", Toast.LENGTH_SHORT).show();
             }
         }
     }
